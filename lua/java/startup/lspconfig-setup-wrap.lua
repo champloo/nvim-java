@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 local log = require('java.utils.log')
-local mason_util = require('java-core.utils.mason')
 
 local server = require('java-core.ls.servers.jdtls')
 
@@ -34,9 +33,11 @@ function M.setup(config)
 			root_markers = config.root_markers,
 			jdtls_plugins = jdtls_plugins,
 			use_mason_jdk = config.jdk.auto_install,
+			use_mason = config.mason,
 		})
 
 		if config.spring_boot_tools.enable then
+			local mason_util = require('java-core.utils.mason')
 			require('spring_boot').setup({
 				ls_path = mason_util.get_pkg_path('spring-boot-tools')
 					.. '/extension/language-server',

@@ -1,5 +1,6 @@
 ---@class java.Config
 ---@field root_markers string[]
+---@field mason { enable: boolean }
 ---@field java_test { enable: boolean }
 ---@field java_debug_adapter { enable: boolean }
 ---@field spring_boot_tools { enable: boolean }
@@ -18,6 +19,11 @@ local config = {
 		'build.gradle',
 		'build.gradle.kts',
 		'.git',
+	},
+
+	-- use mason
+	mason = {
+		enable = true,
 	},
 
 	-- load java test plugins

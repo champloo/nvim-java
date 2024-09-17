@@ -1,5 +1,4 @@
 local decomple_watch = require('java.startup.decompile-watcher')
-local mason_dep = require('java.startup.mason-dep')
 local setup_wrap = require('java.startup.lspconfig-setup-wrap')
 local startup_check = require('java.startup.startup-check')
 
@@ -32,10 +31,13 @@ function M.setup(custom_config)
 		return
 	end
 
-	local is_installing = mason_dep.install(config)
+	if config.mason.enable then
+		local mason_dep = require('java.startup.mason-dep')
+		local is_installing = mason_dep.install(config)
 
-	if is_installing then
-		return
+		if is_installing then
+			return
+		end
 	end
 
 	setup_wrap.setup(config)
